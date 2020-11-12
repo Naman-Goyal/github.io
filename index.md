@@ -34,4 +34,19 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+Having trouble with Pages? Check out our documentation or contact support and we’ll help you sort it out.
+
+{% assign orderedRepos = site.github.public_repositories | sort: 'stargazers_count' | reverse %} {% for repository in orderedRepos %} {% assign homepageLength = repository.homepage | size %} {% if homepageLength > 0 %}
+
+{{repository.name}} | [repo]({{ repository.html_url }}) | [pages]({{ repository.homepage }})
+{% else %}
+
+{{repository.name}} | [repo]({{ repository.html_url }})
+{% endif %}
+
+{{repository.description}}
+{% octicon repo-forked size:small%} {{repository.forks_count}} {% octicon star size:small %} {{repository.stargazers_count}}
+
+{% endfor %}
+
